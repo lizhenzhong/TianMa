@@ -43,18 +43,21 @@ class CarManage {
             OrderDao orderDao = LApplication.it().getDaoSession().getOrderDao();
             long orderId = orderDao.insert(mCurrOrder);
 
-            List<OrderDetails> detailses = new ArrayList<>();
+            List<OrderDetails> details = new ArrayList<>();
             for (Car car : getCars()) {
-                OrderDetails details = new OrderDetails();
-                details.setAmount(String.valueOf(getAmount(car)));
-                details.setOrderId(orderId);
-                details.setCount(car.count);
-                details.setProductId(car.product.getId());
-                details.setProductName(car.product.getName());
-                detailses.add(details);
+                double amount = getAmount(car);
+                if (amount > 0) {
+                    OrderDetails detail = new OrderDetails();
+                    detail.setAmount(String.valueOf(getAmount(car)));
+                    detail.setOrderId(orderId);
+                    detail.setCount(car.count);
+                    detail.setProductId(car.product.getId());
+                    detail.setProductName(car.product.getName());
+                    details.add(detail);
+                }
             }
             OrderDetailsDao orderDetailsDao = LApplication.it().getDaoSession().getOrderDetailsDao();
-            orderDetailsDao.insertInTx(detailses);
+            orderDetailsDao.insertInTx(details);
             return true;
         }
     }
