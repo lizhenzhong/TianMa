@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">天马工坊</string>
+
+    <string name="unit_price">单价：%1$s元</string>
+    <string name="car_product_price">%1$s：总共 %2$s 元</string>
+    <string name="car_all_amount">总计：%1$s 元</string>
+
+    <string name="order_id">订单号：%1$s</string>
+
+
+    <string-array name="product_type">
+        <item>茶刀</item>
+        <item>养壶笔</item>
+        <item>茶夹</item>
+        <item>茶垫</item>
+        <item>其他配件</item>
+    </string-array>
+</resources>

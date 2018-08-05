@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.lzz.myapplication.ProductItemVm" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="@{viewModel.itemClick}"
+        android:orientation="vertical"
+        app:onLongPress="@{viewModel.longClickListener}">
+
+        <com.example.lzz.myapplication.SImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:imageUrl="@{viewModel.photo}"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="300"
+            fresco:placeholderImage="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{viewModel.productName}"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{viewModel.productAmount}"
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

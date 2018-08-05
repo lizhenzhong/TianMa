@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.lzz.myapplication.CarItemVm" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:imageUrl="@{viewModel.photo}"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="300"
+            fresco:placeholderImage="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.name}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:hint="请输入数量"
+                app:onTextWatch="@{viewModel.textWatcher}"
+                android:inputType="number"
+                android:maxLines="1"
+                android:text="@={viewModel.count}" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

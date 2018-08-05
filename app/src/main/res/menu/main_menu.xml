@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_car"
+        android:title="购物车"/>
+    <item
+        android:id="@+id/menu_add_product"
+        android:title="添加产品"/>
+    <item
+        android:id="@+id/menu_add_buyer"
+        android:title="客户列表"/>
+    <item
+        android:id="@+id/menu_order_list"
+        android:title="历史订单"/>
+    <item
+        android:id="@+id/menu_clear_car"
+        android:title="清空购物车"/>
+</menu>
