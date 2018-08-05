@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,6 +17,7 @@ import com.example.lzz.myapplication.databinding.ActivitySelectBuyerBinding;
 import java.util.List;
 
 public class SelectBuyerActivity extends BaseActivity {
+    private static final String EXTRA_PHONE_NUMBER = "phoneNumber";
     private SelectBuyerAdp mAdp;
     private SelectBuyerVm mViewModel;
     private ActivitySelectBuyerBinding mBinding;
@@ -20,6 +25,24 @@ public class SelectBuyerActivity extends BaseActivity {
     public static void skipToSelectBuyerAct(Context context) {
         Intent i = new Intent(context, SelectBuyerActivity.class);
         context.startActivity(i);
+    }
+
+    public static void skipToSelectBuyerAct(Context context, String phoneNumber) {
+        Intent i = new Intent(context, SelectBuyerActivity.class);
+        i.putExtra(EXTRA_PHONE_NUMBER, phoneNumber);
+        context.startActivity(i);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null) {
+            String phoneNumber = intent.getStringExtra(EXTRA_PHONE_NUMBER);
+            if (!TextUtils.isEmpty(phoneNumber)) {
+                mViewModel.phoneNumber.set(phoneNumber);
+                onSearch(null);
+            }
+        }
     }
 
     @Override
@@ -35,23 +58,26 @@ public class SelectBuyerActivity extends BaseActivity {
 
         mBinding.rcBuyers.addItemDecoration(itemDecoration);
         mBinding.rcBuyers.setLayoutManager(linearLayoutManager);
-
-        setData();
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        setData();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.add_buyers_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    private void setData() {
-        List<SelectBuyerItemVm> buyersItemVms = mViewModel.queryBuyers();
-        if (mAdp == null) {
-            mAdp = new SelectBuyerAdp(this, buyersItemVms);
-            mBinding.rcBuyers.setAdapter(mAdp);
-        } else {
-            mAdp.refresh(buyersItemVms);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_add_buyer:
+                AddBuyerActivity.skipToAddBuyerAct(this, true);
+                break;
+            default:
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void refresh(SelectBuyerItemVm itemVm) {
@@ -69,6 +95,16 @@ public class SelectBuyerActivity extends BaseActivity {
                 CarManage.getInstance().clearCar();
                 MainActivity.skipToMainAct(this);
             }
+        }
+    }
+
+    public void onSearch(View view) {
+        List<SelectBuyerItemVm> buyersItemVms = mViewModel.queryBuyers();
+        if (mAdp == null) {
+            mAdp = new SelectBuyerAdp(this, buyersItemVms);
+            mBinding.rcBuyers.setAdapter(mAdp);
+        } else {
+            mAdp.refresh(buyersItemVms);
         }
     }
 }

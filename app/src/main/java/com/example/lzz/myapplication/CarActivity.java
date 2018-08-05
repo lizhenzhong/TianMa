@@ -55,7 +55,7 @@ public class CarActivity extends BaseActivity implements CarManage.OnAmountChang
     }
 
     public void onClickCreate(View view) {
-        if (CarManage.getInstance().getCars().isEmpty()) {
+        if (CarManage.getInstance().isEmpty()) {
             Toast.makeText(this, "请选择购买的商品", Toast.LENGTH_SHORT).show();
             return;
         }

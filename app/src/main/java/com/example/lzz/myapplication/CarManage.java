@@ -122,6 +122,10 @@ class CarManage {
         return mCars;
     }
 
+    boolean isEmpty() {
+        return getAllAmount() <= 0;
+    }
+
     double getAmount(Car car) {
         double amount = 0f;
         try {

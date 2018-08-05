@@ -16,9 +16,12 @@ import com.example.lzz.myapplication.databinding.ActivityAddBuyerBinding;
 
 public class AddBuyerActivity extends BaseActivity {
     public static final String EXTRA_BUYER_ID = "buyerId";
+    public static final String EXTRA_IS_SELECT_BUYER = "isSelectBuyer";
+
     private AddBuyerVm mAddBuyerVm;
     private ActivityAddBuyerBinding mBinding;
     private AlertDialog mDialog;
+    private boolean isSelectBuyer;
 
     public static void skipToAddBuyerAct(Context context) {
         skipToAddBuyerAct(context, -1);
@@ -30,11 +33,18 @@ public class AddBuyerActivity extends BaseActivity {
         context.startActivity(i);
     }
 
+    public static void skipToAddBuyerAct(Context context, boolean isSelectBuyer) {
+        Intent i = new Intent(context, AddBuyerActivity.class);
+        i.putExtra(EXTRA_IS_SELECT_BUYER, isSelectBuyer);
+        context.startActivity(i);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         long buyerId = i.getLongExtra(EXTRA_BUYER_ID, -1);
+        isSelectBuyer = i.getBooleanExtra(EXTRA_IS_SELECT_BUYER, false);
 
         mAddBuyerVm = new AddBuyerVm(buyerId);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_buyer);
@@ -98,7 +108,11 @@ public class AddBuyerActivity extends BaseActivity {
     public void onClickFinish(View view) {
         if (mAddBuyerVm.commit()) {
             Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
-            BuyersListActivity.skipToBuyersListAct(this);
+            if (isSelectBuyer) {
+                SelectBuyerActivity.skipToSelectBuyerAct(this, mAddBuyerVm.phoneNumber.get());
+            } else {
+                BuyersListActivity.skipToBuyersListAct(this);
+            }
             finish();
         } else {
             Toast.makeText(this, "请检查输入的内容是否正确", Toast.LENGTH_SHORT).show();
