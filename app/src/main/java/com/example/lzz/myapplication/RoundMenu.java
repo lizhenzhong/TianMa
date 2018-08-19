@@ -140,7 +140,7 @@ public class RoundMenu extends View {
             case MotionEvent.ACTION_UP:
                 if ((System.currentTimeMillis() - mTouchTime) < 300) {
                     if (onMenuClickListener != null) {
-                        onMenuClickListener.onMenuClick(mClickState + 1);
+                        onMenuClickListener.onMenuClick(mClickState);
                     }
                 }
                 mClickState = -2;

@@ -58,8 +58,8 @@ public class MainActivity extends BaseActivity implements RoundMenu.OnMenuClickL
 
     @Override
     public void onMenuClick(int position) {
-        if (position > 0) {
-            ProductListActivity.skipToProductListAct(this, position);
+        if (position >= 0) {
+            ProductListActivity.skipToProductListAct(this, ++position);
         } else if (position == -1) {
             CarActivity.skipToCarAct(this);
         }
