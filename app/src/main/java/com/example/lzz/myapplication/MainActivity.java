@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements RoundMenu.OnMenuClickL
     public void onMenuClick(int position) {
         if (position > 0) {
             ProductListActivity.skipToProductListAct(this, position);
-        } else {
+        } else if (position == -1) {
             CarActivity.skipToCarAct(this);
         }
     }
