@@ -17,6 +17,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
+            android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>

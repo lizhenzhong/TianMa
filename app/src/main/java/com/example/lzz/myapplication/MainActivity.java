@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.example.lzz.myapplication.databinding.ActivityMainBinding;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements RoundMenu.OnMenuClickListener {
 
     public static void skipToMainAct(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setUser(new MainVm());
+        binding.roundMenuMain.setOnMenuClickListener(this);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_car:
-                CarActivity.skipToProductListAct(this);
+                CarActivity.skipToCarAct(this);
                 break;
             case R.id.menu_add_product:
                 AddProductActivity.skipToAddProductAct(this);
@@ -55,23 +56,12 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickTeaKnife(View view) {
-        ProductListActivity.skipToProductListAct(this, ProductType.TEA_KNIFE);
-    }
-
-    public void onClickPotPen(View view) {
-        ProductListActivity.skipToProductListAct(this, ProductType.POT_PEN);
-    }
-
-    public void onClickTeaClips(View view) {
-        ProductListActivity.skipToProductListAct(this, ProductType.TEA_CLIPS);
-    }
-
-    public void onClickTeaPads(View view) {
-        ProductListActivity.skipToProductListAct(this, ProductType.TEA_PADS);
-    }
-
-    public void onClickOthers(View view) {
-        ProductListActivity.skipToProductListAct(this, ProductType.OTHERS);
+    @Override
+    public void onMenuClick(int position) {
+        if (position > 0) {
+            ProductListActivity.skipToProductListAct(this, position);
+        } else {
+            CarActivity.skipToCarAct(this);
+        }
     }
 }

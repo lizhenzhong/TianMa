@@ -8,6 +8,4 @@ import android.databinding.ObservableField;
 
 public class MainVm {
     public final ObservableField<String> name = new ObservableField<>("");
-
-
 }

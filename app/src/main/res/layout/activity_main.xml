@@ -11,37 +11,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <Button
+        <com.example.lzz.myapplication.RoundMenu
+            android:id="@+id/round_menu_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClickTeaKnife"
-            android:text="茶刀" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickPotPen"
-            android:text="养壶笔" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickTeaClips"
-            android:text="茶夹" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickTeaPads"
-            android:text="茶垫" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickOthers"
-            android:text="其他配件" />
-
+            android:layout_margin="8dp" />
     </LinearLayout>
 </layout>

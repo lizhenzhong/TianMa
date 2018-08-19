@@ -14,7 +14,7 @@ public class CarActivity extends BaseActivity implements CarManage.OnAmountChang
     private CarAdp carAdp;
     private CarVm carVm;
 
-    public static void skipToProductListAct(Context context) {
+    public static void skipToCarAct(Context context) {
         Intent i = new Intent(context, CarActivity.class);
         context.startActivity(i);
     }

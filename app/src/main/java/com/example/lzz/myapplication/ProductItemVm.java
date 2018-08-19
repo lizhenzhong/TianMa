@@ -2,11 +2,7 @@ package com.example.lzz.myapplication;
 
 import android.databinding.ObservableField;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
-
-import static com.example.lzz.myapplication.ProductType.TEA_KNIFE;
 
 /**
  * Created by lzz on 2018/7/14.
@@ -27,7 +23,7 @@ public class ProductItemVm {
 
     public void itemClick(View view) {
         CarManage.getInstance().addCar(product);
-        CarActivity.skipToProductListAct(view.getContext());
+        CarActivity.skipToCarAct(view.getContext());
     }
 
     public View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
